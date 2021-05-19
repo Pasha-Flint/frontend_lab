@@ -1,0 +1,694 @@
+/*  Table of contents:
+    1.intro
+    2.UI task
+       2.1 Header
+       2.2 Splash text
+       2.3 Slider
+       2.4 Main content
+       2.5 Footer
+       2.6 Media Queries
+    3.JS task           */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: #313131;
+}
+
+h1,
+p {
+    margin: 0;
+}
+
+:root {
+    --intro-btn-color: #fff;
+    --ui-color-primary: #a7c353;
+}
+
+
+/*      1.intro  */
+
+.intro-bg {
+    background: #aaa;
+    height: 100vh;
+    padding-top: 10em;
+    overflow: hidden;
+}
+
+.intro-card {
+    background: #404040;
+    color: #fff;
+    font-size: 18px;
+    padding: 2rem;
+    max-width: 25rem;
+    margin: auto;
+    border: 2px solid #fff;
+    border-radius: 12px;
+}
+
+.intro-card h1 {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    margin: 0 0 2rem;
+    text-align: center;
+}
+
+.intro-btn-set {
+    display: flex;
+    justify-content: space-around;
+    max-width: 15rem;
+    margin: 0 auto;
+}
+
+.intro-btn {
+    padding: 0.9em 1.8em;
+    text-decoration: none;
+    font-weight: 900;
+    border: 2px solid var(--intro-btn-color);
+    color: var(--intro-btn-color);
+    outline: 2px solid var(--intro-btn-color);
+    outline-offset: -2px;
+    transition: outline-offset 250ms ease;
+}
+
+.intro-btn:hover,
+.intro-btn:focus {
+    outline-offset: -8px;
+}
+
+
+/*    2.UI task   */
+
+/*  2.1 Header  */
+
+.container {
+    max-width: 1200px;
+    background: #fff;
+    margin: 0 auto;
+    font-family: Georgia, Times, Times New Roman, serif;
+
+}
+
+header {
+    border-top: 0.3125rem solid var(--ui-color-primary);
+    display: flow-root;
+    overflow: hidden;
+}
+
+.logo {
+    color: #999;
+    width: 215px;
+    padding: 18px 20px 25px;
+    float: left;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.logo h1 {
+    font-size: 30px;
+    font-weight: 300;
+    color: #666;
+    line-height: 1;
+}
+
+.logo h1:first-letter {
+    font-size: 40px;
+}
+
+.logo:focus,
+.logo:focus h1 {
+    background: var(--ui-color-primary);
+    color: #fff;
+    outline: none;
+}
+
+nav {
+    color: #979797;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+nav a {
+    padding: 50px 20px 30px;
+    text-decoration: none;
+    color: inherit;
+    white-space: pre;
+}
+
+nav a:hover,
+nav a:focus {
+    background: var(--ui-color-primary);
+    color: #fff;
+    outline: none;
+}
+
+.breakline {
+    height: 1px;
+    width: 90%;
+    margin: 0 auto;
+    background: var(--ui-color-primary);
+}
+
+
+/*  2.2 Splash text  */
+
+.shout {
+    background: inherit;
+    font-size: 22px;
+    line-height: 1.4;
+    color: #666;
+    font-style: italic;
+    padding: 2em 32px;
+    text-align-last: right;
+}
+
+.shout::before {
+    content: '\201C';
+}
+
+.shout::after {
+    content: '\201E';
+}
+
+
+/*  2.3 Slider  */
+
+.slider {
+    overflow: hidden;
+}
+
+.hide {
+    display: none;
+}
+
+.slider-body {
+    max-width: 920px;
+    height: 350px;
+    background: #353535;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.item img {
+    object-fit: cover;
+}
+
+.item {
+    position: absolute;
+}
+
+.item-active {
+    z-index: 2;
+}
+
+.item-prev {
+    z-index: 3;
+    opacity: 0;
+    transition: 250ms linear;
+}
+
+.slider-switch {
+    display: flex;
+    margin: 0 auto;
+    padding: 20px 0;
+    width: 120px;
+    justify-content: space-between;
+}
+
+.slider-btn {
+    width: 20px;
+    height: 20px;
+    background: var(--ui-color-primary);
+    border: 4px solid var(--ui-color-primary);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider-btn-active {
+    background: #fff;
+    transition: 250ms linear;
+}
+
+.slider-btn-side {
+    z-index: 4;
+    border: 3px solid var(--ui-color-primary);
+    position: absolute;
+    top: 40%;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.left {
+    left: 10px;
+    background: #000 url("../images/arrow-left.png") no-repeat center;
+}
+
+.right {
+    right: 10px;
+    background: #000 url("../images/arrow-right.png") no-repeat center;
+}
+
+.slider-title {
+    position: absolute;
+    bottom: 20px;
+    right: 60px;
+    z-index: 4;
+    max-width: 350px;
+}
+
+.slider-title div {
+    font-size: 20px;
+    background: var(--ui-color-primary);
+    color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+}
+
+.slider-title p {
+    font-size: 14px;
+    background: #fff;
+    color: #999;
+    padding: 15px;
+}
+
+/*  2.4 Main content  */
+
+.content {
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.col {
+    min-width: 230px;
+    width: 30%;
+    margin: 0 5px;
+    color: #999;
+    overflow: hidden;
+}
+
+h2 {
+    color: #666;
+    font-size: 22px;
+    margin: 0;
+    padding: 20px 0 40px;
+    font-weight: 300;
+}
+
+.col a {
+    display: block;
+    width: 97%;
+    margin: 0 auto;
+    text-decoration: none;
+    color: var(--ui-color-primary);
+    text-align: right;
+}
+
+.col a:hover {
+    text-decoration: underline;
+}
+
+.col a:focus {
+    outline: 2px solid #000;
+    outline-offset: 1px;
+}
+
+.about-us-pic {
+    width: 260px;
+    display: block;
+    margin: 0 auto;
+}
+
+.about-us-pic,
+.col p{
+    margin-bottom: 20px;
+}
+
+.service {
+    display: flow-root;
+    margin-bottom: 10px;
+}
+
+.service img {
+    float: left;
+}
+
+.service p {
+    margin-left: 84px;
+    margin-bottom: 8px;
+}
+
+.service-title {
+    color: #878787;
+    font-weight: 900;
+    font-size: 17px;
+}
+
+.comment {
+    margin-bottom: 15px;
+}
+
+.comment p {
+    margin-bottom: 5px;
+}
+
+.comment-name {
+    font-size: 18px;
+    color: #878787;
+    display: flow-root;
+}
+
+.comment-name p {
+    padding: 20px 0;
+}
+
+.comment-name span {
+    font-weight: 900;
+}
+
+.glyph {
+    color: #d4d4d4;
+    float: left;
+    font-size: 180px;
+    height: 75px;
+    width: 75px;
+    margin-top: -22px;
+}
+
+
+/*  2.5 Footer  */
+
+footer {
+    background: #313131;
+    color: #989898;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.footer-main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.footer-main > * {
+    min-width: 230px;
+    width: 22%;
+    margin: 0 5px;
+}
+
+h3 {
+    color: #fff;
+    padding: 20px 0;
+    margin: 0;
+    font-weight: 300;
+    font-size: 18px;
+    border-bottom: 2px solid #3a3a3a;
+}
+
+footer ul {
+    list-style: none;
+    padding: 15px 0 0;
+    margin: 0;
+}
+
+footer li {
+    padding-top: 5px;
+}
+
+.detail-title {
+    font-weight: 900;
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--ui-color-primary);
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer a:focus {
+    outline: 2px solid var(--ui-color-primary);
+    outline-offset: 1px;
+}
+
+.social a {
+    border-bottom: 2px solid #3a3a3a;
+    display: flow-root;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.social div {
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background-size: 84px;
+    float: left;
+}
+
+.social p {
+    padding: 8px 44px;
+    white-space: pre;
+}
+
+.linkedin-icon {
+    background: url("../images/social-sprites.png") -4px -4px;
+}
+
+.twitter-icon {
+    background: url("../images/social-sprites.png") -46px -4px;
+}
+
+.pinterest-icon {
+    background: url("../images/social-sprites.png") -4px -46px;
+}
+
+.rss-icon {
+    background: url("../images/social-sprites.png") -46px -46px;
+}
+
+.blog-item {
+    padding-top: 20px;
+}
+
+.blog-item p {
+    padding-bottom: 10px;
+}
+
+.blog-item a {
+    display: block;
+    text-align: right;
+}
+
+.blog-item p:first-child {
+    font-weight: 900;
+    font-size: 16px;
+    padding-bottom: 15px;
+}
+
+form {
+    padding-top: 20px;
+}
+
+form > * {
+    margin-bottom: 10px;
+    background: #383838;
+    color: #989898;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+    resize: none;
+    font-family: Georgia, Times, Times New Roman, serif;
+    font-size: 15px;
+    overflow: hidden;
+    display: block;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #313131, 0 0 0 4px var(--ui-color-primary);
+    background: #fff;
+    color: #000;
+}
+
+.submit-btn:focus {
+    box-shadow: 0 0 0 2px #313131, 0 0 0 4px #fff;
+}
+
+label {
+    display: none;
+}
+
+.submit-btn {
+    width: auto;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.submit-btn,
+.submit-btn:focus {
+    background: var(--ui-color-primary);
+    color: #313131;
+}
+
+.submit-btn:active {
+    background: #fff;
+}
+
+.copyright {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-top: 2px solid #3a3a3a;
+}
+
+.copyright p {
+    padding: 20px;
+    white-space: pre;
+}
+
+
+/*      2.6 Media Queries  */
+
+@media screen and (max-width: 999px) {
+    .logo {
+        float: none;
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    nav a {
+        padding: 30px;
+    }
+
+    nav {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 959px) {
+    .footer-main {
+        justify-content: space-around;
+    }
+}
+
+@media screen and (max-width: 875px){
+    nav a {
+        width: 30%;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 779px){
+    .content {
+        justify-content: space-around;
+    }
+}
+
+@media screen and (max-width: 564px){
+    nav a {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 339px){
+    nav a {
+        width: 100%;
+    }
+}
+
+
+/*      3.JS task */
+
+
+.js-body {
+    background: gray;
+    margin: 50px auto 0;
+    padding: 20px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    max-width: 470px;
+}
+
+.controls,
+.variants {
+    display: flex;
+    flex-wrap: wrap;
+ }
+
+.controls {
+    justify-content: space-around;
+}
+
+.variants {
+    justify-content: space-between;
+}
+
+.result {
+    background: black;
+    color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    padding: 10px;
+    min-height: 45px;
+}
+
+.btn {
+    cursor: pointer;
+    font-size: 18px;
+    background: #007700;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    min-width: 70px;
+    min-height: 70px;
+    padding: 1em;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.select-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.letter,
+.result {
+    font-size: 20px;
+}
+
+.btn:hover,
+.btn:focus {
+    outline: none;
+    background: #00cc00;
+    box-shadow: none;
+}
+
+.btn:active {
+    background: #dd0000;
+}
